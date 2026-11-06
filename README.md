@@ -1,11 +1,11 @@
-# Koati for Claude
+# Koati for your assistant
 
 Koati's connector and its routine, in one install. Claude reads the cards your team left for it, makes the work in the tools you've connected, and hands each one back to a person — it never shares, approves or marks anything done.
 
 In Claude Code:
 
 ```
-/plugin marketplace add heyderekj/koati-claude-plugin
+/plugin marketplace add heyderekj/koati-assistant
 /plugin install koati@koati
 ```
 
@@ -22,3 +22,7 @@ While Claude Code works on a card left for it, the card says **Working**, **Wait
 - After one of Koati's own tools, the card it was called on.
 
 Never your prompts, commands, file paths or file contents. A session that never touches a card left for Claude is never written down. Turn them off by disabling the plugin from `/plugin`.
+
+## Codex and Grok Build
+
+The same card states, for the other assistants: `codex/` holds hooks for Codex, and `grok/` a hook script for Grok Build. Each folder's README says how to set it up.

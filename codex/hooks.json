@@ -1,0 +1,124 @@
+{
+    "hooks": {
+        "UserPromptSubmit": [
+            {
+                "hooks": [
+                    {
+                        "type": "mcp_tool",
+                        "server": "koati",
+                        "tool": "report_activity",
+                        "timeout": 5,
+                        "input": {
+                            "session": "${session_id}",
+                            "event": "UserPromptSubmit",
+                            "runs_in": "codex"
+                        }
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "^mcp__.*[Kk]oati.*__get_handoff$",
+                "hooks": [
+                    {
+                        "type": "mcp_tool",
+                        "server": "koati",
+                        "tool": "report_activity",
+                        "timeout": 5,
+                        "input": {
+                            "session": "${session_id}",
+                            "event": "PostToolUse",
+                            "runs_in": "codex",
+                            "card_id": "${tool_input.id}"
+                        }
+                    }
+                ]
+            },
+            {
+                "matcher": "^mcp__.*[Kk]oati.*__(report_progress|ask_person|attach_artifact|upload_build|add_card_note)$",
+                "hooks": [
+                    {
+                        "type": "mcp_tool",
+                        "server": "koati",
+                        "tool": "report_activity",
+                        "timeout": 5,
+                        "input": {
+                            "session": "${session_id}",
+                            "event": "PostToolUse",
+                            "runs_in": "codex",
+                            "card_id": "${tool_input.card_id}"
+                        }
+                    }
+                ]
+            },
+            {
+                "matcher": "*",
+                "hooks": [
+                    {
+                        "type": "mcp_tool",
+                        "server": "koati",
+                        "tool": "report_activity",
+                        "timeout": 5,
+                        "input": {
+                            "session": "${session_id}",
+                            "event": "PostToolUse",
+                            "runs_in": "codex"
+                        }
+                    }
+                ]
+            }
+        ],
+        "PermissionRequest": [
+            {
+                "hooks": [
+                    {
+                        "type": "mcp_tool",
+                        "server": "koati",
+                        "tool": "report_activity",
+                        "timeout": 5,
+                        "input": {
+                            "session": "${session_id}",
+                            "event": "PermissionRequest",
+                            "runs_in": "codex"
+                        }
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "hooks": [
+                    {
+                        "type": "mcp_tool",
+                        "server": "koati",
+                        "tool": "report_activity",
+                        "timeout": 5,
+                        "input": {
+                            "session": "${session_id}",
+                            "event": "Stop",
+                            "runs_in": "codex"
+                        }
+                    }
+                ]
+            }
+        ],
+        "SessionEnd": [
+            {
+                "hooks": [
+                    {
+                        "type": "mcp_tool",
+                        "server": "koati",
+                        "tool": "report_activity",
+                        "timeout": 5,
+                        "input": {
+                            "session": "${session_id}",
+                            "event": "SessionEnd",
+                            "runs_in": "codex"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

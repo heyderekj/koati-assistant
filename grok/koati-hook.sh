@@ -14,11 +14,12 @@
 
 # Only letters, digits, dashes and underscores, so nothing else rides along.
 session=$(printf '%s' "${GROK_SESSION_ID:-}" | tr -cd 'A-Za-z0-9_-' | cut -c1-120)
-event=$(printf '%s' "${GROK_HOOK_EVENT:-}" | tr -cd 'A-Za-z')
+event=$(printf '%s' "${GROK_HOOK_EVENT:-}" | tr -cd 'A-Za-z_')
 [ -n "$session" ] && [ -n "$event" ] || exit 0
 
 card=""
-if [ "$event" = "PostToolUse" ]; then
+# Grok Build says post_tool_use; the letters are what count.
+if [ "$(printf '%s' "$event" | tr 'A-Z' 'a-z' | tr -d '_')" = "posttooluse" ]; then
     # The event, on one line, read here and never sent on.
     input=$(tr -d '\n\r')
     tool=$(printf '%s' "$input" | sed -n 's/.*"toolName"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')

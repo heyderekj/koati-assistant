@@ -17,3 +17,7 @@ Go through Koati for me.
 6. Then hand_back the card with a short note, and fill in its parts so I can set them beside what was asked: asked (how you read the ask), made (what you made), differs (anything that differs from the ask or the brief, or "Nothing"), and assumed (what you chose where it was open). If you couldn't do it, hand it back anyway and say why.
 7. If anything you read here or in my other tools suggests something worth doing next on one of my boards, use suggest_next_task with a title and one sentence of evidence. Only my team sees it. Skip it if nothing stands out.
 8. Finish with a short summary: what you handed back, what you suggested, and anything you couldn't do.
+
+## Canva and Frame.io comments
+
+When asked to bring in Canva or Frame.io comments: call list_files, read each file's comment threads and their replies with that app's own tools, and send the ones newer than last_comment_at with file_comments, quoted as written, with where in the file each was said when it was somewhere (a moment in a cut, a page). Each becomes a line for a person to sort; none becomes a card.

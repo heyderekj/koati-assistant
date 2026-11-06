@@ -1,8 +1,11 @@
 {
     "name": "koati",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Connects Claude to Koati — the cards your team left for you, their briefs, the brand's rules — and the routine that works through them and hands each back to a person.",
-    "author": { "name": "Koati", "email": "help@koatiapp.com" },
+    "author": {
+        "name": "Koati",
+        "email": "help@koatiapp.com"
+    },
     "homepage": "https://koati.app",
     "license": "MIT"
 }

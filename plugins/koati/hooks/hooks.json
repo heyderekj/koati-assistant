@@ -19,7 +19,7 @@
         ],
         "PostToolUse": [
             {
-                "matcher": "mcp__plugin_koati_koati__get_handoff",
+                "matcher": "^mcp__.*[Kk]oati.*__get_handoff$",
                 "hooks": [
                     {
                         "type": "mcp_tool",
@@ -36,7 +36,7 @@
                 ]
             },
             {
-                "matcher": "mcp__plugin_koati_koati__(report_progress|ask_person|attach_artifact|upload_build|add_card_note)$",
+                "matcher": "^mcp__.*[Kk]oati.*__(report_progress|ask_person|attach_artifact|upload_build|add_card_note)$",
                 "hooks": [
                     {
                         "type": "mcp_tool",
@@ -53,7 +53,7 @@
                 ]
             },
             {
-                "matcher": "^(?!mcp__plugin_koati_koati__).*",
+                "matcher": "^(?!mcp__.*[Kk]oati.*__).*",
                 "hooks": [
                     {
                         "type": "mcp_tool",

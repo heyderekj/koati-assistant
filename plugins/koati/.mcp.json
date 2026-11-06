@@ -1,5 +1,8 @@
 {
     "mcpServers": {
-        "koati": { "type": "http", "url": "https://koati.app/mcp/koati" }
+        "koati": {
+            "type": "http",
+            "url": "https://koati.app/mcp/koati/plugin"
+        }
     }
 }

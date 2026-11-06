@@ -1,11 +1,11 @@
-# Koati for Claude
+# Koati for your assistant
 
 Koati's connector and its routine, in one install. Claude reads the cards your team left for it, makes the work in the tools you've connected, and hands each one back to a person — it never shares, approves or marks anything done.
 
 In Claude Code:
 
 ```
-/plugin marketplace add heyderekj/koati-claude-plugin
+/plugin marketplace add heyderekj/koati-assistant
 /plugin install koati@koati
 ```
 

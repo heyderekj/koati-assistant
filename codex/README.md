@@ -2,7 +2,7 @@
 
 With these, a card you leave for Codex says **Working**, **Waiting** (a permission it asked for, answered in Codex, never in Koati) or **Stopped**.
 
-1. Add Koati to Codex as an MCP server named `koati` (Koati's Settings → Your assistant shows how), and sign in.
+1. Add Koati to Codex and sign in: `codex mcp add koati --url https://koati.app/mcp/koati`, then `codex mcp login koati`.
 2. Copy `hooks.json` to `~/.codex/hooks.json`. If you already have one, add these entries to it.
 3. Run `/hooks` in Codex and trust them. Codex skips hooks it hasn't been told to trust, and asks again if they change.
 

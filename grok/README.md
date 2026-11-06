@@ -4,10 +4,9 @@ With these, a card you leave for Grok Build says **Working** or **Stopped**. Gro
 
 Grok Build's hooks run a command, so this one is a short `sh` script. It needs `curl`, which macOS and most Linux systems have.
 
-1. Make a key in Koati: Settings → Your assistant → Keys.
-2. Set it where Grok Build runs: `export KOATI_KEY=…` in your shell's profile.
-3. Copy `koati-hook.sh` to `~/.grok/koati-hook.sh`.
-4. Copy `hooks.json` to `~/.grok/hooks/koati.json`.
+1. In Koati, open Settings → Your assistant → See it on the card → Grok Build, and press Make a hooks key. It can only say what your assistant is doing, nothing else.
+2. Put the `export KOATI_KEY=…` line it shows in your shell's profile.
+3. Run the line Koati shows under it. It puts `koati-hook.sh` in `~/.grok/` and `hooks.json` in `~/.grok/hooks/koati.json`.
 
 If you have the Cursor CLI: Grok Build's installer replaces Cursor's `agent` command in `~/.local/bin` with its own, and puts `~/.grok/bin` first on your PATH in `~/.zshrc`. Check `which agent` afterwards if you use Cursor's.
 

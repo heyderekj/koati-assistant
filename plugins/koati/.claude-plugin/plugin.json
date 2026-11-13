@@ -1,6 +1,6 @@
 {
     "name": "koati",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "description": "Connects Claude to Koati — the cards your team left for you, their briefs, the brand's rules — and the routine that works through them and hands each back to a person.",
     "author": {
         "name": "Koati",

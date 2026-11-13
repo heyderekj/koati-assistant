@@ -1,6 +1,58 @@
 ---
 name: go-through-koati
 description: Work through what a person left you in Koati — the cards they handed to their assistant — then hand each back for them to check. Use when asked to go through Koati, check what was left, or pick up handed-off work. Needs Koati's MCP server connected.
+hooks:
+  UserPromptSubmit:
+    - hooks:
+        - type: mcp_tool
+          server: 'plugin:koati:koati'
+          tool: report_activity
+          timeout: 5
+          input:
+            session: '${session_id}'
+            event: 'UserPromptSubmit'
+            runs_in: 'claude_code'
+  PostToolUse:
+    - matcher: '^(?!mcp__.*[Kk]oati.*__).*'
+      hooks:
+        - type: mcp_tool
+          server: 'plugin:koati:koati'
+          tool: report_activity
+          timeout: 5
+          input:
+            session: '${session_id}'
+            event: 'PostToolUse'
+            runs_in: 'claude_code'
+  PermissionRequest:
+    - hooks:
+        - type: mcp_tool
+          server: 'plugin:koati:koati'
+          tool: report_activity
+          timeout: 5
+          input:
+            session: '${session_id}'
+            event: 'PermissionRequest'
+            runs_in: 'claude_code'
+  Stop:
+    - hooks:
+        - type: mcp_tool
+          server: 'plugin:koati:koati'
+          tool: report_activity
+          timeout: 5
+          input:
+            session: '${session_id}'
+            event: 'Stop'
+            runs_in: 'claude_code'
+  SessionEnd:
+    - hooks:
+        - type: mcp_tool
+          server: 'plugin:koati:koati'
+          tool: report_activity
+          timeout: 5
+          input:
+            session: '${session_id}'
+            event: 'SessionEnd'
+            runs_in: 'claude_code'
 ---
 
 # Go through Koati

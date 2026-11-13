@@ -33,6 +33,20 @@ if [ "$(printf '%s' "$event" | tr 'A-Z' 'a-z' | tr -d '_')" = "posttooluse" ]; t
     fi
 fi
 
+# Only a session that has touched one of Koati's tools says anything: the
+# rest of your sessions, in any project, never call Koati. A marker per
+# session, on this machine only, remembers which ones have.
+marks="${TMPDIR:-/tmp}/koati-hooks"
+mark="$marks/$session"
+if [ -n "$card" ]; then
+    mkdir -p "$marks" 2>/dev/null && : > "$mark" 2>/dev/null
+elif [ ! -e "$mark" ]; then
+    exit 0
+fi
+case "$(printf '%s' "$event" | tr 'A-Z' 'a-z' | tr -d '_')" in
+    sessionend) rm -f "$mark" 2>/dev/null ;;
+esac
+
 body="{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"report_activity\",\"arguments\":{\"session\":\"$session\",\"event\":\"$event\",\"runs_in\":\"grok_build\",\"card_id\":\"$card\"}}}"
 
 curl -s -m 4 -o /dev/null -X POST "${KOATI_URL:-https://koati.app/mcp/koati}" \

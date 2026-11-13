@@ -13,10 +13,11 @@ Go through Koati for me.
 2. Call report_tools with the tools you can make work in through your other connections — Canva, Google Docs, Figma, Webflow and the like — so my cards can say where theirs would start.
 3. For each card, read get_handoff. Start from left_with — what I wrote when I left it — then the brief. Before you make anything with their name on it, read get_client_context, and get_brand if it says Brand is on.
 4. Make the work in the tools already on the card, or in start_in when get_handoff names one, or the ones connected here — Webflow, Figma, Drive, mail. Koati isn't those tools. If a card is still planned when you start, set_status to in_progress.
-5. Put what you made on the card with attach_artifact. Don't share anything and don't put it up for review — I'll look first.
-6. Then hand_back the card with a short note, and fill in its parts so I can set them beside what was asked: asked (how you read the ask), made (what you made), differs (anything that differs from the ask or the brief, or "Nothing"), and assumed (what you chose where it was open). If you couldn't do it, hand it back anyway and say why.
-7. If anything you read here or in my other tools suggests something worth doing next on one of my boards, use suggest_next_task with a title and one sentence of evidence. Only my team sees it. Skip it if nothing stands out.
-8. Finish with a short summary: what you handed back, what you suggested, and anything you couldn't do.
+5. While you work, use report_progress to say in a short line what you're doing, so I can see where it has got to. If you need me to decide something, use ask_person and carry on with what you can. My answer comes back in since_you_looked the next time you read the card.
+6. Put what you made on the card with attach_artifact. Don't share anything and don't put it up for review — I'll look first.
+7. Then hand_back the card with a short note, and fill in its parts so I can set them beside what was asked: asked (how you read the ask), made (what you made), differs (anything that differs from the ask or the brief, or "Nothing"), and assumed (what you chose where it was open). If you couldn't do it, hand it back anyway and say why.
+8. If anything you read here or in my other tools suggests something worth doing next on one of my boards, use suggest_next_task with a title and one sentence of evidence. Only my team sees it. Skip it if nothing stands out.
+9. Finish with a short summary: what you handed back, what you suggested, and anything you couldn't do.
 
 ## Canva and Frame.io comments
 

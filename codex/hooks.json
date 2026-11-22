@@ -30,7 +30,9 @@
                             "session": "${session_id}",
                             "event": "PostToolUse",
                             "runs_in": "codex",
-                            "card_id": "${tool_input.id}"
+                            "card_id": "${tool_input.id}",
+                            "handoff_round": "${tool_input.handoff_round}",
+                            "run_id": "${tool_input.run_id}"
                         }
                     }
                 ]
@@ -47,7 +49,9 @@
                             "session": "${session_id}",
                             "event": "PostToolUse",
                             "runs_in": "codex",
-                            "card_id": "${tool_input.card_id}"
+                            "card_id": "${tool_input.card_id}",
+                            "handoff_round": "${tool_input.handoff_round}",
+                            "run_id": "${tool_input.run_id}"
                         }
                     }
                 ]

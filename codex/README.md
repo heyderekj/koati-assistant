@@ -8,6 +8,6 @@ With these, a card you leave for Codex says **Working**, **Waiting** (a permissi
 
 The card says Waiting only when Codex actually asks you for permission. In its default sandbox some commands are simply blocked without asking, and then the card stays on Working.
 
-Each hook calls Koati's `report_activity` over that same sign-in, with three things only: Codex's session id (Koati keeps a hash of it), the event's name and, after one of Koati's own tools, the card it was called on. Never your prompts, commands, file paths or file contents. A session that never touches a card left for Codex is never written down.
+Each hook calls Koati's `report_activity` over that same sign-in, with three things only: Codex's session id (Koati keeps a hash of it), the event's name and, after one of Koati's own tools, the card it was called on, with the pickup round and run that Koati gave out for it. Never your prompts, commands, file paths or file contents. Koati notes nothing about a session that never touches a card left for Codex.
 
 If you named the server something other than `koati`, change `"server"` in each hook to match.

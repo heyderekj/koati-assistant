@@ -3,7 +3,8 @@
 # stopped, or done with the session. Run by Grok Build's hooks.
 #
 # Sends three things only: Grok's session id, the hook event's name and,
-# after one of Koati's own tools, the card it was called on. Never your
+# after one of Koati's own tools, the card it was called on (with the
+# pickup round and run Koati gave out for it). Never your
 # prompts, commands, file paths or file contents.
 #
 # Needs KOATI_KEY: a key from Koati's Settings → Your assistant → Keys.
@@ -18,6 +19,8 @@ event=$(printf '%s' "${GROK_HOOK_EVENT:-}" | tr -cd 'A-Za-z_')
 [ -n "$session" ] && [ -n "$event" ] || exit 0
 
 card=""
+round=""
+run=""
 # Grok Build says post_tool_use; the letters are what count.
 if [ "$(printf '%s' "$event" | tr 'A-Z' 'a-z' | tr -d '_')" = "posttooluse" ]; then
     # The event, on one line, read here and never sent on.
@@ -30,6 +33,9 @@ if [ "$(printf '%s' "$event" | tr 'A-Z' 'a-z' | tr -d '_')" = "posttooluse" ]; t
     esac
     if [ -n "$field" ]; then
         card=$(printf '%s' "$input" | sed -n "s/.*\"toolInput\"[[:space:]]*:[[:space:]]*{[^}]*\"$field\"[[:space:]]*:[[:space:]]*\"\{0,1\}\([0-9][0-9]*\).*/\1/p")
+        # The round and run Koati handed out for it, when the call carried them: only a UUID's characters.
+        round=$(printf '%s' "$input" | sed -n 's/.*"toolInput"[[:space:]]*:[[:space:]]*{[^}]*"handoff_round"[[:space:]]*:[[:space:]]*"\([0-9A-Fa-f-]\{36\}\)".*/\1/p')
+        run=$(printf '%s' "$input" | sed -n 's/.*"toolInput"[[:space:]]*:[[:space:]]*{[^}]*"run_id"[[:space:]]*:[[:space:]]*"\([0-9A-Fa-f-]\{36\}\)".*/\1/p')
     fi
 fi
 
@@ -47,7 +53,7 @@ case "$(printf '%s' "$event" | tr 'A-Z' 'a-z' | tr -d '_')" in
     sessionend) rm -f "$mark" 2>/dev/null ;;
 esac
 
-body="{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"report_activity\",\"arguments\":{\"session\":\"$session\",\"event\":\"$event\",\"runs_in\":\"grok_build\",\"card_id\":\"$card\"}}}"
+body="{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"report_activity\",\"arguments\":{\"session\":\"$session\",\"event\":\"$event\",\"runs_in\":\"grok_build\",\"card_id\":\"$card\",\"handoff_round\":\"$round\",\"run_id\":\"$run\"}}}"
 
 curl -s -m 4 -o /dev/null -X POST "${KOATI_URL:-https://koati.app/mcp/koati}" \
     -H "Authorization: Bearer $KOATI_KEY" \

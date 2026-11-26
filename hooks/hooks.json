@@ -1,0 +1,65 @@
+{
+    "hooks": {
+        "BeforeAgent": [
+            {
+                "hooks": [
+                    {
+                        "name": "koati",
+                        "type": "command",
+                        "command": "sh \"${extensionPath}${/}gemini${/}koati-hook.sh\" \"${extensionPath}\"",
+                        "timeout": 5000
+                    }
+                ]
+            }
+        ],
+        "AfterTool": [
+            {
+                "matcher": ".*",
+                "hooks": [
+                    {
+                        "name": "koati",
+                        "type": "command",
+                        "command": "sh \"${extensionPath}${/}gemini${/}koati-hook.sh\" \"${extensionPath}\"",
+                        "timeout": 5000
+                    }
+                ]
+            }
+        ],
+        "Notification": [
+            {
+                "hooks": [
+                    {
+                        "name": "koati",
+                        "type": "command",
+                        "command": "sh \"${extensionPath}${/}gemini${/}koati-hook.sh\" \"${extensionPath}\"",
+                        "timeout": 5000
+                    }
+                ]
+            }
+        ],
+        "AfterAgent": [
+            {
+                "hooks": [
+                    {
+                        "name": "koati",
+                        "type": "command",
+                        "command": "sh \"${extensionPath}${/}gemini${/}koati-hook.sh\" \"${extensionPath}\"",
+                        "timeout": 5000
+                    }
+                ]
+            }
+        ],
+        "SessionEnd": [
+            {
+                "hooks": [
+                    {
+                        "name": "koati",
+                        "type": "command",
+                        "command": "sh \"${extensionPath}${/}gemini${/}koati-hook.sh\" \"${extensionPath}\"",
+                        "timeout": 5000
+                    }
+                ]
+            }
+        ]
+    }
+}

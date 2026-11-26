@@ -1,4 +1,5 @@
-# Keeps the routine word for word with Koati's own (AssistantRoutine), weekly and by hand.
+# Keeps the routine word for word with Koati's own (AssistantRoutine), weekly and by hand,
+# in the Claude Code plugin and the Gemini CLI extension alike.
 # Only the words below the frontmatter come from Koati. The frontmatter stays this
 # plugin's own: its hooks are what let a card say Working, Waiting and Stopped, and
 # Koati's copy (/assistant/skill.md) is written for any assistant, so it has none.
@@ -14,18 +15,20 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - name: Bring the routine's words up to date, keeping the plugin's frontmatter
+            - name: Bring the routine's words up to date, keeping each copy's frontmatter
               run: |
                   set -euo pipefail
-                  skill=plugins/koati/skills/go-through-koati/SKILL.md
                   curl -fsSL https://koati.app/assistant/skill.md -o "$RUNNER_TEMP/koati.md"
-                  # This plugin's frontmatter: the first line through the second ---.
-                  awk '/^---$/ { n++; print; if (n == 2) exit; next } { print }' "$skill" > "$RUNNER_TEMP/head.md"
                   # Koati's words: everything after its own frontmatter.
                   awk 'n >= 2 { print; next } /^---$/ { n++ }' "$RUNNER_TEMP/koati.md" > "$RUNNER_TEMP/body.md"
                   test -s "$RUNNER_TEMP/body.md" || { echo "Koati's skill came back with no words below its frontmatter."; exit 1; }
-                  cat "$RUNNER_TEMP/head.md" "$RUNNER_TEMP/body.md" > "$skill"
-                  grep -q '^hooks:' "$skill" || { echo "The skill lost its hooks: frontmatter. Not opening a pull request."; exit 1; }
+                  # The Claude Code plugin's copy, and the Gemini CLI extension's (skills/), which has no hooks: frontmatter.
+                  for skill in plugins/koati/skills/go-through-koati/SKILL.md skills/go-through-koati/SKILL.md; do
+                      # This copy's frontmatter: the first line through the second ---.
+                      awk '/^---$/ { n++; print; if (n == 2) exit; next } { print }' "$skill" > "$RUNNER_TEMP/head.md"
+                      cat "$RUNNER_TEMP/head.md" "$RUNNER_TEMP/body.md" > "$skill"
+                  done
+                  grep -q '^hooks:' plugins/koati/skills/go-through-koati/SKILL.md || { echo "The plugin's skill lost its hooks: frontmatter. Not opening a pull request."; exit 1; }
             - uses: peter-evans/create-pull-request@v7
               with:
                   title: Bring the routine up to date with Koati

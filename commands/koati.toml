@@ -1,0 +1,5 @@
+description = "Go through what your team left for you in Koati, then hand each card back."
+prompt = """
+Go through Koati: use the go-through-koati skill. Start with list_handoffs, work only on the cards a person left for you, and hand each one back with hand_back.
+{{args}}
+"""

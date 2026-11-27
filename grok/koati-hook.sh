@@ -11,6 +11,12 @@
 # Quiet and quick either way: it never blocks Grok, and a session that
 # never touches a card left for your assistant is never written down.
 
+# Or from Koati's one-line install, which keeps the key, and the address
+# when it isn't koati.app, in a file only you can read.
+if [ -z "$KOATI_KEY" ] && [ -f "$HOME/.koati/hooks.env" ]; then
+    KOATI_KEY=$(sed -n "s/^KOATI_KEY=['\"]\{0,1\}\([^'\"]*\)['\"]\{0,1\}$/\1/p" "$HOME/.koati/hooks.env" | head -n 1)
+    [ -n "$KOATI_URL" ] || KOATI_URL=$(sed -n "s/^KOATI_URL=\(https:[^'\" ]*\)$/\1/p" "$HOME/.koati/hooks.env" | head -n 1)
+fi
 [ -n "$KOATI_KEY" ] || exit 0
 
 # Only letters, digits, dashes and underscores, so nothing else rides along.

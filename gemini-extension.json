@@ -1,0 +1,11 @@
+{
+    "name": "koati",
+    "version": "0.1.0",
+    "description": "Koati's connector and the routine that works through what your team left for you.",
+    "mcpServers": {
+        "koati": {
+            "httpUrl": "https://koati.app/mcp/koati/plugin"
+        }
+    },
+    "contextFileName": "GEMINI.md"
+}

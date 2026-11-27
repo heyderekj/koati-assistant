@@ -32,6 +32,26 @@ They send three things only:
 
 Never your prompts, commands, file paths or file contents. Koati notes nothing about a session that never touches a card left for Claude. Turn them off by disabling the plugin from `/plugin`.
 
+## Gemini CLI
+
+This repository is also a Gemini CLI extension (`gemini-extension.json`):
+
+```
+gemini extensions install https://github.com/heyderekj/koati-assistant
+```
+
+Then run `/mcp auth koati` and sign in. It brings the same server, the same routine (`skills/go-through-koati/`), a `/koati` command and `GEMINI.md`.
+
+Its hooks (`hooks/hooks.json`, running `gemini/koati-hook.sh`) give a card the same **Working**, **Waiting** and **Stopped**. A command hook can't use the sign-in, so they need a hooks key: make one in Koati on Settings → Your assistant → See it on the card → Gemini CLI, and put it in a `.env` beside the extension as `KOATI_KEY=…` (or in your shell). The key can only report what Gemini is doing on a card. Without it the hooks do nothing.
+
+Gemini runs an extension's hooks in every session, so the script keeps a marker per session: only a session that has called one of Koati's tools on a card sends anything, and it sends the same three things as above. The script always answers Gemini with `{}`, so Koati being slow or down never holds Gemini up.
+
+The Antigravity CLI reads Gemini's servers from `~/.gemini/config/mcp_config.json`:
+
+```json
+{ "mcpServers": { "koati": { "serverUrl": "https://koati.app/mcp/koati/plugin" } } }
+```
+
 ## Codex and Grok Build
 
 The same card states, for the other assistants: `codex/` holds hooks for Codex, and `grok/` a hook script for Grok Build. Each folder's README says how to set it up.

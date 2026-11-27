@@ -42,7 +42,7 @@ gemini extensions install https://github.com/heyderekj/koati-assistant
 
 Then run `/mcp auth koati` and sign in. It brings the same server, the same routine (`skills/go-through-koati/`), a `/koati` command and `GEMINI.md`.
 
-Its hooks (`hooks/hooks.json`, running `gemini/koati-hook.sh`) give a card the same **Working**, **Waiting** and **Stopped**. A command hook can't use the sign-in, so they need a hooks key: make one in Koati on Settings → Your assistant → See it on the card → Gemini CLI, and put it in a `.env` beside the extension as `KOATI_KEY=…` (or in your shell). The key can only report what Gemini is doing on a card. Without it the hooks do nothing.
+Its hooks (`hooks/hooks.json`, running `gemini/koati-hook.sh`) give a card the same **Working**, **Waiting** and **Stopped**. A command hook can't use the sign-in, so they need a hooks key: in Koati, open Settings → Your assistant → More ways to connect → Live progress on cards → Gemini CLI, press Make the install command, and run the one line it shows. It keeps the key in `~/.koati/hooks.env`, readable only by you. A `KOATI_KEY=…` in a `.env` beside the extension, or in your shell, still works. The key can only report what Gemini is doing on a card. Without it the hooks do nothing.
 
 Gemini runs an extension's hooks in every session, so the script keeps a marker per session: only a session that has called one of Koati's tools on a card sends anything, and it sends the same three things as above. The script always answers Gemini with `{}`, so Koati being slow or down never holds Gemini up.
 
